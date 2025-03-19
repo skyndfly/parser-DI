@@ -11,6 +11,9 @@ use app\CsvCreator;
 
 
 try {
+    if (php_sapi_name() !== 'cli') {
+        throw new DomainException("Этот скрипт должен быть запущен из командной строки.");
+    }
     $console = Console::getInstance();
     $console->handle();
 
@@ -20,5 +23,5 @@ try {
     CsvCreator::create($parser->getResult());
 
 } catch (Throwable $e) {
-    echo 'Ошибка' . $e->getMessage();
+    echo 'Ошибка: ' . $e->getMessage() . PHP_EOL;
 }
