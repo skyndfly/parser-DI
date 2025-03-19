@@ -17,8 +17,7 @@ try {
     $console = Console::getInstance();
     $console->handle();
 
-    $data = JsonLoader::load($console->getUrl());
-    $parser = Parser::getInstance($data);
+    $parser = Parser::getInstance(JsonLoader::load($console->getUrl()));
     $parser->execute();
     CsvCreator::create($parser->getResult());
 
